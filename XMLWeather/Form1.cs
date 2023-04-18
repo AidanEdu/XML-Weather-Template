@@ -41,10 +41,16 @@ namespace XMLWeather
                 reader.ReadToFollowing("time");
                 d.date = reader.GetAttribute("day");
 
+                reader.ReadToFollowing("symbol");
+                d.condition = reader.GetAttribute("name");
+
                 reader.ReadToFollowing("temperature");
                 d.tempLow = reader.GetAttribute("min");
 
                 d.tempHigh = reader.GetAttribute("max");
+
+
+                
 
                 days.Add(d);
                 //TODO: if day object not null add to the days list
@@ -62,8 +68,12 @@ namespace XMLWeather
             reader.ReadToFollowing("city");
             days[0].location = reader.GetAttribute("name");
 
+            reader.ReadToFollowing("sun");
+            days[0].sunRise = reader.GetAttribute("rise");
+            days[0].sunSet = reader.GetAttribute("set");
+
             reader.ReadToFollowing("temperature");
-            days[0].currentTemp = reader.GetAttribute("value"); 
+            days[0].currentTemp = reader.GetAttribute("value");
         }
 
 
