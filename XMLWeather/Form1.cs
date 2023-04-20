@@ -68,14 +68,20 @@ namespace XMLWeather
             reader.ReadToFollowing("city");
             days[0].location = reader.GetAttribute("name");
 
+            reader.ReadToFollowing("timezone");
+            days[0].timeZone = reader.ReadString();
+
+
             reader.ReadToFollowing("sun");
             days[0].sunRise = reader.GetAttribute("rise");
             days[0].sunSet = reader.GetAttribute("set");
-
+            
             reader.ReadToFollowing("temperature");
             days[0].currentTemp = reader.GetAttribute("value");
-        }
 
+            reader.ReadToFollowing("humidity");
+            days[0].humidity = reader.GetAttribute("value"); 
+        }
 
     }
 }
