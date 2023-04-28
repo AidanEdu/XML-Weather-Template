@@ -80,8 +80,15 @@ namespace XMLWeather
             days[0].currentTemp = reader.GetAttribute("value");
 
             reader.ReadToFollowing("humidity");
-            days[0].humidity = reader.GetAttribute("value"); 
+            days[0].humidity = reader.GetAttribute("value");
+
+            reader.ReadToFollowing("lastupdate");
+            days[0].lastUpdate = reader.GetAttribute("value");
+
+            reader.Close(); 
         }
+
+        
 
     }
 }
