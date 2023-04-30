@@ -26,13 +26,14 @@ namespace XMLWeather
         {
             InitializeComponent();
 
-            ExtractForecast();
-            ExtractCurrent();
+            ExtractForecast(location);
+            ExtractCurrent(location);
             
             // open weather screen for todays weather
             CurrentScreen cs = new CurrentScreen();
             this.Controls.Add(cs);
 
+            //inverts the color of the screen if night the current time is past sunset
             if (DateTime.Now.Hour <= 12)
             {
                 if (DateTime.Now.Hour < Convert.ToDouble(Form1.days[0].sunRise.Substring(11, 2)) + Convert.ToDouble(Form1.days[0].timeZone) / 3600)
@@ -62,7 +63,7 @@ namespace XMLWeather
             }
         }
 
-        public static void ExtractForecast()
+        public static void ExtractForecast(string location)
         {
             XmlReader reader = XmlReader.Create($"http://api.openweathermap.org/data/2.5/forecast/daily?q={location}&mode=xml&units=metric&cnt=7&appid=3f2e224b815c0ed45524322e145149f0");
             
@@ -92,7 +93,7 @@ namespace XMLWeather
             reader.Close();
         }
 
-        public static void ExtractCurrent()
+        public static void ExtractCurrent(string location)
         {
             // current info is not included in forecast file so we need to use this file to get it
             XmlReader reader = XmlReader.Create($"http://api.openweathermap.org/data/2.5/weather?q={location}&mode=xml&units=metric&appid=3f2e224b815c0ed45524322e145149f0");

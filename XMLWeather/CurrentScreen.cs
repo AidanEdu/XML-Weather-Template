@@ -14,6 +14,7 @@ namespace XMLWeather
         public CurrentScreen()
         {
             InitializeComponent();
+            //just using math to place things 
             cityOutput.Location = new Point((295 / 2) - (cityOutput.Width / 2), 30);
             DisplayCurrent();
             maxLabel.Location = new Point(295 / 2 - maxLabel.Width / 2 - 25, 177);
@@ -21,6 +22,7 @@ namespace XMLWeather
            
             pictureBox1.Location = new Point(minLabel.Location.X + minLabel.Width + 15, 168); 
 
+            //formats the pop up region
             #region Formating
             showLabels(false);
             moreInfoFormating();
@@ -67,17 +69,20 @@ namespace XMLWeather
 
         public void DisplayCurrent()
         {
+            //sets all text boxes to their desired values
             cityOutput.Text = Form1.days[0].location;
             currentOutput.Text = $"{Convert.ToDouble(Form1.days[0].currentTemp).ToString("#")}°";
             minLabel.Text = $"L: {Convert.ToDouble(Form1.days[0].tempLow).ToString("#")}°";
             maxLabel.Text = $"H: {Convert.ToDouble(Form1.days[0].tempHigh).ToString("#")}°";
+            //uses to string to format
             dateLabel.Text = $"{DateTime.Now.ToString("dddd")} \n{DateTime.Now.ToString("MMMM dd")}";
             humidityLabel.Text = $"Humidity:                       {Form1.days[0].humidity}%";
+            //breaks down the infomation, formats it then displays acounting for timezone
             sunriseLabel.Text = $"Sunrise:                    {Convert.ToDouble(Form1.days[0].sunRise.Substring(11, 2)) + Convert.ToDouble(Form1.days[0].timeZone)/3600}:{Form1.days[0].sunRise.Substring(14,2)}am";
             sunsetLabel.Text =  $"Sunset:                     {12 - Convert.ToDouble(Form1.days[0].sunSet.Substring(11, 2)) + Convert.ToDouble(Form1.days[0].timeZone) / 3600}:{Form1.days[0].sunSet.Substring(14, 2)}pm";
             
 
-
+            //displys the last updated time, else statment is for time transeding hours ex, updated 3:40 displayed 4:00
             if (DateTime.Now.Hour == Convert.ToDouble(Form1.days[0].lastUpdate.Substring(11, 2)) - 4)
             {
                 lastUpdateLabel.Text = $"Last Updated:   {DateTime.Now.Minute - Convert.ToDouble(Form1.days[0].lastUpdate.Substring(14, 2))} Mins Ago";
@@ -102,16 +107,19 @@ namespace XMLWeather
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
+            //opens more information
             showLabels(true);
         }
 
         private void xLabel_Click(object sender, EventArgs e)
         {
+            //closes more infomation
             showLabels(false);
         }
 
         public void showLabels(bool show)
         {
+            //toggles between showing more information and hidding it 
             if (show == false)
             {
                 backColorLabel.Visible = false;
@@ -135,6 +143,7 @@ namespace XMLWeather
 
         public void moreInfoFormating()
         {
+            //again, more formating for the more info section
             moreInfoLabel.Location = new Point(99, 79);
             humidityLabel.Location = new Point(33, 142);
             sunriseLabel.Location = new Point(33, 224); 
@@ -146,6 +155,7 @@ namespace XMLWeather
 
         public void colorInversion(Color def, Color opposite)
         {
+            //inverts the colors of the text and the back screen depending on the time of the day
             cityOutput.ForeColor = def;
             currentOutput.ForeColor = def;
             maxLabel.ForeColor = def;
@@ -176,6 +186,7 @@ namespace XMLWeather
 
         private void searchLabel_Click(object sender, EventArgs e)
         {
+            //simply opens city search 
             Form f = this.FindForm();
             f.Controls.Remove(this);
 

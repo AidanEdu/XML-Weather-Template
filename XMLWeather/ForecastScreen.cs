@@ -11,20 +11,23 @@ namespace XMLWeather
 {
     public partial class ForecastScreen : UserControl
     {
-
+        //lists for formating
         List<Label> dayLabels = new List<Label>();    
         List<Label> highLables = new List<Label>();
         List<Label> lowLables = new List<Label>(); 
         public ForecastScreen()
         {
             InitializeComponent();
+            //adds the labels to respective lists and formats them
             formating(dayLabels, highLables, lowLables);
+            //same function of other invertcolor methods
             invertColors(Form1.def, Form1.opposite);
             displayForecast();
         }
 
         public void displayForecast()
         {
+            //kind of a mix of a for loop and for each loop used to dispaly the name of the day
             int index = 0; 
             foreach(Label l in dayLabels)
             {
@@ -33,6 +36,7 @@ namespace XMLWeather
                 index++; 
             }
 
+            //displays the dayly highs
             index = 0;
             foreach (Label l in highLables)
             {
@@ -41,6 +45,7 @@ namespace XMLWeather
                 index++;
             }
 
+            //displays the lows
             index = 0;
             foreach (Label l in lowLables)
             {
@@ -48,13 +53,11 @@ namespace XMLWeather
                 l.Text += $" {Convert.ToDouble(Form1.days[index].tempLow).ToString("#")}°";
                 index++;
             }
-
-
-            foreach (Label l in dayLabels) ; 
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
+            //backs out to current screen
             Form f = this.FindForm();
             f.Controls.Remove(this);
 
@@ -64,6 +67,7 @@ namespace XMLWeather
 
         public void invertColors(Color def, Color opposite)
         {
+            //same deal as before
             currentLabel.ForeColor = def;
             foreach (Label l in dayLabels)
             {
@@ -75,6 +79,7 @@ namespace XMLWeather
 
         public void formating(List<Label> labels, List<Label> highLabels, List<Label> lowLabels)
         {
+            //addes lables to lists and evenly and appropiatly spaces them out
             labels.Add(day0Label);
             labels.Add(day1Label);
             labels.Add(day2Label);  

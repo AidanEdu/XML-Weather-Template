@@ -23,12 +23,19 @@ namespace XMLWeather
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            Form1.location = inputBox.Text;
+
+            string location = inputBox.Text;
             inputBox.Text = ""; 
+            //removes all idexs from days for a requirment used in extract forcast
+            for (int i = 0; i < Form1.days.Count; i++)
+            {
+                Form1.days.RemoveAt(i); 
+            }
+            //try catch incase user enters the wrong formate
             try
             {
-                Form1.ExtractCurrent();
-                Form1.ExtractForecast();
+                Form1.ExtractCurrent(location);
+                Form1.ExtractForecast(location);
             }
             catch {
                 imputlabel.Text = $"Please try again (City, County)"; 
