@@ -43,6 +43,7 @@
             this.lastUpdateLabel = new System.Windows.Forms.Label();
             this.moreInfoLabel = new System.Windows.Forms.Label();
             this.currentConditionsLabel = new System.Windows.Forms.Label();
+            this.searchLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,7 +106,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = global::XMLWeather.Properties.Resources._8201;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(207, 168);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -220,11 +220,24 @@
             this.currentConditionsLabel.Text = "Heavy Clouds";
             this.currentConditionsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // searchLabel
+            // 
+            this.searchLabel.AutoSize = true;
+            this.searchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.searchLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.searchLabel.Location = new System.Drawing.Point(221, 22);
+            this.searchLabel.Name = "searchLabel";
+            this.searchLabel.Size = new System.Drawing.Size(60, 20);
+            this.searchLabel.TabIndex = 55;
+            this.searchLabel.Text = "Search";
+            this.searchLabel.Click += new System.EventHandler(this.searchLabel_Click);
+            // 
             // CurrentScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
+            this.Controls.Add(this.searchLabel);
             this.Controls.Add(this.moreInfoLabel);
             this.Controls.Add(this.lastUpdateLabel);
             this.Controls.Add(this.sunsetLabel);
@@ -241,7 +254,7 @@
             this.Controls.Add(this.currentConditionsLabel);
             this.Controls.Add(this.currentOutput);
             this.Name = "CurrentScreen";
-            this.Size = new System.Drawing.Size(845, 450);
+            this.Size = new System.Drawing.Size(907, 450);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -264,5 +277,6 @@
         private System.Windows.Forms.Label lastUpdateLabel;
         private System.Windows.Forms.Label moreInfoLabel;
         private System.Windows.Forms.Label currentConditionsLabel;
+        private System.Windows.Forms.Label searchLabel;
     }
 }

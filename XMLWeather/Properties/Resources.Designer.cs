@@ -99,5 +99,14 @@ namespace XMLWeather.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+
+        internal static System.Drawing.Bitmap currentWeatherIcon
+        {
+            get
+            {
+                object obj = ResourceManager.GetObject("currentWeatherIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace XMLWeather
             pictureBox1.Location = new Point(minLabel.Location.X + minLabel.Width + 15, 168); 
 
             #region Formating
-            showLabels(true);
+            showLabels(false);
             moreInfoFormating();
             xLabel.Parent = backColorLabel;
             int newX = xLabel.Location.X - backColorLabel.Location.X;
@@ -75,7 +75,20 @@ namespace XMLWeather
             humidityLabel.Text = $"Humidity:                       {Form1.days[0].humidity}%";
             sunriseLabel.Text = $"Sunrise:                    {Convert.ToDouble(Form1.days[0].sunRise.Substring(11, 2)) + Convert.ToDouble(Form1.days[0].timeZone)/3600}:{Form1.days[0].sunRise.Substring(14,2)}am";
             sunsetLabel.Text =  $"Sunset:                     {12 - Convert.ToDouble(Form1.days[0].sunSet.Substring(11, 2)) + Convert.ToDouble(Form1.days[0].timeZone) / 3600}:{Form1.days[0].sunSet.Substring(14, 2)}pm";
-            lastUpdateLabel.Text = $"Last Updated:            {Convert.ToDouble(Form1.days[0].lastUpdate.Substring(11, 2)) + Convert.ToDouble(Form1.days[0].timeZone) / 3600}:{Form1.days[0].lastUpdate.Substring(14, 2)}"; 
+            
+
+
+            if (DateTime.Now.Hour == Convert.ToDouble(Form1.days[0].lastUpdate.Substring(11, 2)) - 4)
+            {
+                lastUpdateLabel.Text = $"Last Updated:   {DateTime.Now.Minute - Convert.ToDouble(Form1.days[0].lastUpdate.Substring(14, 2))} Mins Ago";
+            }
+            else
+            {
+                lastUpdateLabel.Text = $"Last Updated:   {DateTime.Now.Minute - Convert.ToDouble(Form1.days[0].lastUpdate.Substring(14, 2)) + 60} Mins Ago";
+            }
+
+            colorInversion(Form1.def, Form1.opposite);   
+            
         }
 
         private void forecastLabel_Click(object sender, EventArgs e)
@@ -90,8 +103,6 @@ namespace XMLWeather
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             showLabels(true);
-            backColorLabel.BackColor = Color.FromArgb(200, 100, 100, 100);
-            
         }
 
         private void xLabel_Click(object sender, EventArgs e)
@@ -118,6 +129,7 @@ namespace XMLWeather
                 sunsetLabel.Visible = true;
                 lastUpdateLabel.Visible = true;
                 xLabel.Visible = true;
+                colorInversion(Form1.def, Form1.opposite);
             }
         }
 
@@ -130,6 +142,45 @@ namespace XMLWeather
             lastUpdateLabel.Location = new Point(33, 387);
             backColorLabel.Location = new Point(17, 65);
             xLabel.Location = new Point(244, 79); 
+        }
+
+        public void colorInversion(Color def, Color opposite)
+        {
+            cityOutput.ForeColor = def;
+            currentOutput.ForeColor = def;
+            maxLabel.ForeColor = def;
+            minLabel.ForeColor = def;
+            currentConditionsLabel.ForeColor = def;
+            dateLabel.ForeColor = def;  
+            forecastLabel.ForeColor = def;
+            searchLabel.ForeColor = def;
+            backColorLabel.BackColor = Color.FromArgb(200, def);
+/*
+            if (def == Color.White)
+            {
+                
+            }
+            else
+            {
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + $"/Resources/8201.png");
+            }
+*/
+            this.BackColor = opposite; 
+            xLabel.ForeColor = opposite;
+            moreInfoLabel.ForeColor = opposite; 
+            humidityLabel.ForeColor = opposite;
+            sunriseLabel.ForeColor = opposite; 
+            sunsetLabel.ForeColor = opposite;
+            lastUpdateLabel.ForeColor = opposite;   
+        }
+
+        private void searchLabel_Click(object sender, EventArgs e)
+        {
+            Form f = this.FindForm();
+            f.Controls.Remove(this);
+
+            searchScreen ss = new searchScreen();
+            f.Controls.Add(ss);
         }
     }
 }
